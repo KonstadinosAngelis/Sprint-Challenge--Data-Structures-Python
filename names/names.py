@@ -41,39 +41,24 @@ class BSTNode:
                 self.left.insert(value)
 
     def contains(self, target):
-        if self.right is None and self.left is None:
-            return
-
         if self.value == target:
-            print("got here!")
-            return target
-
-        if self.value < target:
-            if self.right.value is target:
-                return target
-            else:
-                self.right.contains(target)
-
-        if self.value > target:
-            if self.left.value is target:
-                return target
-            else:
-                self.left.contains(target)
+            return True
+        elif self.value > target:
+            if self.left != None:
+                return self.left.contains(target)
+        elif self.value < target:
+            if self.right != None:
+                return self.right.contains(target)
+        return False
 
 test = BSTNode("connor")
-test.insert("testing time!")
-test.insert("testing time2!")
-test.insert("testing time3!")
-test.insert("testing time4!")
-test.insert("testing time0!")
 
-print(test.contains("testing time!2"))
+for n in names_1:
+    test.insert(n)
 
-# for n in names_1:
-#     test.insert(n)
-
-# for names in names_1:
-#     print(test.contains(names))
+for names in names_2:
+    if test.contains(names):
+        duplicates.append(names)
 
 
 
