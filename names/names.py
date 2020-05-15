@@ -12,11 +12,57 @@ f.close()
 
 duplicates = []  # Return the list of duplicates in this data structure
 
-# Replace the nested for loops below with your improvements
-for name_1 in names_1:
-    for name_2 in names_2:
-        if name_1 == name_2:
-            duplicates.append(name_1)
+# for name_1 in names_1:
+#     for name_2 in names_2:
+#         if name_1 == name_2:
+#             duplicates.append(name_1)
+
+# for each in names_1:
+#     if each not in names_2:
+#         duplicates.append(each)
+# print(duplicates)
+
+class BSTNode:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+
+    def insert(self, value):
+        if self.value <= value:
+            if self.right is None:
+                self.right = BSTNode(value)
+            else:
+                self.right.insert(value)
+        elif self.value > value:
+            if self.left is None:
+                self.left = BSTNode(value)
+            else:
+                self.left.insert(value)
+
+    def contains(self, target):
+        if self.value == target:
+            return True
+        elif self.value > target:
+            if self.left != None:
+                return self.left.contains(target)
+        elif self.value < target:
+            if self.right != None:
+                return self.right.contains(target)
+        return False
+
+test = BSTNode("connor")
+
+for n in names_1:
+    test.insert(n)
+
+for names in names_2:
+    if test.contains(names):
+        duplicates.append(names)
+
+
+
+
 
 end_time = time.time()
 print (f"{len(duplicates)} duplicates:\n\n{', '.join(duplicates)}\n\n")
